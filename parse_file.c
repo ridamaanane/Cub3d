@@ -1,22 +1,5 @@
 #include "parsing.h"
 
-void parse_file(char *filename)
-{
-    int fd = open(filename, O_RDONLY);
-    if (fd < 0)
-    {
-        printf("Error\nCould not open file\n");
-        exit(1);
-    }
-
-    char *line;
-    while ((line = get_next_line(fd)) != NULL)
-    {
-        printf("Line: %s", line);
-        free(line);
-    }
-    close(fd);
-}
 
 int is_number(char *str)
 {
@@ -109,3 +92,29 @@ void parse_line (char *line, t_game *game)
     }
 }
 
+void parse_file(t_game *game, char *filename)
+{
+    int fd = open(filename, O_RDONLY);
+    if (fd < 0)
+    {
+        printf("Error\nCould not open file\n");
+        exit(1);
+    }
+
+    char *line;
+    while ((line = get_next_line(fd)) != NULL)
+    {
+        if (is_texture_line(line))
+            parse_texture(line, game);
+        else if (is_color_line(line))
+            parse_color_line(line, game);
+        else if (line_not_empty(line))
+        {
+            // when we reach the first map line
+            parse_map(game, fd, line);
+            break; // stop reading here, parse_map reads rest
+        }
+        free(line); // free line after using it
+    }
+    close(fd);
+}

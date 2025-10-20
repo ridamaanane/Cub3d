@@ -6,7 +6,7 @@
 /*   By: rmaanane <ridamaanane@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 15:06:56 by rmaanane          #+#    #+#             */
-/*   Updated: 2025/10/04 16:50:16 by rmaanane         ###   ########.fr       */
+/*   Updated: 2025/10/13 20:55:10 by rmaanane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,27 @@ typedef struct s_colors
 
 typedef struct s_game
 {
+    char **map;        // array of strings (the map)
+    int map_count;     // how many lines we stored
+    int map_height;    // optional: total height
+    int map_width;     // optional: max width
     t_textures tex;
 	t_colors colors;
     // later you’ll add: colors, map, player, etc
 }   t_game;
 
+//parse_file
+int parse_color(char *str);
+int parse_color(char *str);
+void parse_line (char *line, t_game *game);
+void parse_file(t_game *game, char *filename);
 
+//parse_map
 
+int	line_not_empty(char *line);
+void add_map_line(t_game *game, char *line)
+void parse_color_line(char *line, t_game *game);
+void parse_map(t_game *game, int fd, char *line);
 
 
 #endif
