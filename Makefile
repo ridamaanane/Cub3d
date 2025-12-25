@@ -4,26 +4,17 @@ LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
 CMLX = -lmlx -lXext -lX11
 
-SRC = 
-
-SRCB = 
-
+SRC = check_file_extension.c parse_color.c parse_map.c utils.c utils2.c utils3.c main.c \
+	
 
 OBJ = $(SRC:%.c=%.o)
 OBJB = $(SRCB:%.c=%.o)
 
-BONUS = .bns
-
-NAME = cub3D
+NAME = CUB3D
 RM = rm -f
 
 all: libft_rule $(NAME)
 
-bonus: libft_rule $(BONUS)
-
-$(BONUS): $(OBJB)
-	@touch $(BONUS)
-	$(CC) $(OBJB) $(CMLX) -L$(LIBFT_DIR) -lft -o $(NAME)
 
 $(NAME): $(OBJ)
 	$(CC) $(OBJ) $(CMLX) -L$(LIBFT_DIR) -lft -o $(NAME)
@@ -32,16 +23,14 @@ libft_rule:
 	@$(MAKE) -C $(LIBFT_DIR)
 
 clean:
-	@$(RM) $(OBJ) $(OBJB)
+	@$(RM) $(OBJ)
 	@$(MAKE) clean -C $(LIBFT_DIR)
 
 fclean: clean
-	@$(RM) $(BONUS)
 	@$(RM) $(NAME)
 	@$(RM) $(LIBFT)
-	
 
 re: fclean all
 
-.SECONDARY: $(OBJ) $(OBJB)
-.PHONY: all clean fclean re bonus
+.SECONDARY: $(OBJ)
+.PHONY: all clean fclean re

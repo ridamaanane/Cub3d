@@ -1,9 +1,51 @@
 #include "parsing.h"
+#include <stdio.h>
+#include <stdlib.h>
 
-void init_game(t_game *game)
+int main(int argc, char **argv)
 {
-    game->map = malloc(sizeof(char *) * 1000); // reserve space for up to 1000 map lines (adjust later)
-    game->map_count = 0;
-    game->map_height = 0;
-    game->map_width = 0;
+    t_game game;
+    int fd;
+
+    if (argc != 2)
+    {
+        printf("Usage: %s <map_file.cub>\n", argv[0]);
+        return 1;
+    }
+
+    // Initialize struct
+    game.map = NULL;
+    game.map_height = 0;
+    game.map_started = 0;
+    game.tex.no = NULL;
+    game.tex.so = NULL;
+    game.tex.we = NULL;
+    game.tex.ea = NULL;
+    game.colors.floor = -1;
+    game.colors.ceiling = -1;
+
+    // Open file
+    fd = open(argv[1], O_RDONLY);
+    if (fd < 0)
+    {
+        perror("Error opening file");
+        return 1;
+    }
+
+    // Parse the map
+    parse_map(&game, fd);
+    close(fd);
+
+    // Test output
+    printf("Textures:\nNO: %s\nSO: %s\nWE: %s\nEA: %s\n",
+           game.tex.no, game.tex.so, game.tex.we, game.tex.ea);
+    printf("Colors: Floor: %d, Ceiling: %d\n", 
+           game.colors.floor, game.colors.ceiling);
+    printf("Player: x=%d, y=%d, dir=%c\n", 
+           game.player.x, game.player.y, game.player.dir);
+    printf("Map (%d lines):\n", game.map_height);
+    for (int i = 0; i < game.map_height; i++)
+        printf("%s\n", game.map[i]);
+
+    return 0;
 }

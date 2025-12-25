@@ -20,7 +20,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-# define TILE_SIZE 64
+// # define TILE_SIZE 64
 # define ESC_KEY 65307
 # define UP 65362
 # define DOWN 65364
@@ -34,41 +34,63 @@
 
 typedef struct s_textures
 {
-    char *no; // North texture path
-    char *so; // South texture path
-    char *we; // West texture path
-    char *ea; // East texture path
+    char *no;
+    char *so; 
+    char *we; 
+    char *ea;
 }   t_textures;
 
 typedef struct s_colors
 {
-    int floor;    // store as single int: (R << 16 | G << 8 | B)
+    int floor;
     int ceiling;
 } t_colors;
 
+typedef struct s_player
+{
+    int x;      // column in the map
+    int y;      // row in the map
+    char dir;   // 'N', 'S', 'E', 'W'
+} t_player;
+
 typedef struct s_game
 {
-    char **map;        // array of strings (the map)
-    int map_count;     // how many lines we stored
-    int map_height;    // optional: total height
-    int map_width;     // optional: max width
+    char **map;
+    int map_started; 
+    int map_height;
     t_textures tex;
 	t_colors colors;
-    // later you’ll add: colors, map, player, etc
+    t_player player;
 }   t_game;
 
-//parse_file
-int parse_color(char *str);
-int parse_color(char *str);
-void parse_line (char *line, t_game *game);
-void parse_file(t_game *game, char *filename);
+//parse_color
+int is_number(char *str);
+int ft_arrlen(char **arr);
+int parse_color(char *path);
 
 //parse_map
+int	is_map_line(char *line);
+void store_map_line(t_game *game, char *line);
+void check_allowed_characters(t_game *game);
+void parse_map(t_game *game, int fd);
 
-int	line_not_empty(char *line);
-void add_map_line(t_game *game, char *line)
-void parse_color_line(char *line, t_game *game);
-void parse_map(t_game *game, int fd, char *line);
+//check_file_extension
+int	ft_strcmp(char *s1, char *s2);
+void check_file_extension(char *filename);
 
+//utils
+char *clean_line(char *line);
+char **resize_map(char **map, int map_height);
+void find_player_pos(t_game *game);
+
+//utils2
+int	is_empty_line(char *line);
+int	is_identifier(char *line);
+int	is_valid_map_char(char c);
+void parse_identifier(t_game *game, char *line);
+
+//utils3
+void check_the_borders(t_game *game);
+void check_side_borders(t_game *game);
 
 #endif
