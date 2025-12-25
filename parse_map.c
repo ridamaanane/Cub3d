@@ -13,10 +13,10 @@ int	is_map_line(char *line)
 			continue;
 		}
 		if (is_valid_map_char(line[i]))
-			return (0);
+			return (1);
 		i++;
 	}
-	return (1);
+	return (0);
 }
 
 void check_allowed_characters(t_game *game)
@@ -24,21 +24,20 @@ void check_allowed_characters(t_game *game)
 	int (i), (j);
 
 	i = 0;
-	j = 0;
 	while (game->map[i])
-    {
-        j = 0;
-        while (game->map[i][j])
-        {
-            if (!is_valid_map_char(game->map[i][j]))
-            {
-                printf("Error\nInvalid character in map\n");
-                exit(1);
-            }
+	{
+		j = 0;
+		while (game->map[i][j])
+		{
+			if (!is_valid_map_char(game->map[i][j]) && game->map[i][j] != '\n')
+			{
+				printf("Error\nInvalid character in map\n");
+				exit(1);
+			}
 			j++;
-        }
-        i++;
-    }
+		}
+		i++;
+	}
 }
 
 void store_map_line(t_game *game, char *line)
