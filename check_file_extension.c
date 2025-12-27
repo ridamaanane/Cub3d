@@ -5,7 +5,7 @@ int	ft_strcmp(char *s1, char *s2)
 	int	i;
 
 	i = 0;
-	while (s1[i])
+	while (s1[i] && s2[i])
 	{
 		if (s1[i] > s2[i])
 			return (1);
@@ -22,8 +22,5 @@ void check_file_extension(char *filename)
 
     len = ft_strlen(filename);
     if (len < 4 || ft_strcmp(filename + len - 4, ".cub") != 0)
-    {
-        printf("Error\nInvalid file extension. Must be .cub\n");
-        exit(1);
-    }
+		exit_error("Error\nInvalid file extension. Must be .cub");
 }

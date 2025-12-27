@@ -1,0 +1,31 @@
+#include "parsing.h"
+
+void check_path_textures(t_game *game)
+{
+    char *paths[4];
+    int i;
+    int len;
+    int fd;
+
+    paths[0] = game->tex.no;
+    paths[1] = game->tex.so;
+    paths[2] = game->tex.we;
+    paths[3] = game->tex.ea;
+    i = 0;
+    while (i < 4)
+    {
+        if (!paths[i])
+            exit_error("Error\nMissing texture");
+        if (ft_strlen(paths[i]) < 4)
+            exit_error("Error\nInvalid texture path");
+        len = ft_strlen(paths[i]);
+        if (len < 4 || ft_strcmp((paths[i] + len) - 4, ".xpm") != 0)
+            exit_error("Error\nInvalid texture extension");
+        fd = open(paths[i], O_RDONLY);
+        if (fd == -1)
+            exit_error("Error\nTexture file not found or unreadable");
+        close(fd);
+        i++;
+    }
+}
+

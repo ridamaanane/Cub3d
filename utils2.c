@@ -42,6 +42,7 @@ int	is_valid_map_char(char c)
 	return (0);
 }
 
+
 void parse_identifier(t_game *game, char *line)
 {
 	int i;
@@ -67,25 +68,25 @@ void parse_identifier(t_game *game, char *line)
 	{
 		game->tex.identifiers_count++;
 		game->tex.got_no++;
-		game->tex.no = path;
+		game->tex.no = clean_line(path);
 	}
 	else if (!ft_strncmp(line, "SO", 2) && !game->tex.got_so)
 	{
 		game->tex.identifiers_count++;
 		game->tex.got_so++;
-		game->tex.so = path;
+		game->tex.so = clean_line(path);
 	}
 	else if (!ft_strncmp(line, "WE", 2) && !game->tex.got_we)
 	{
 		game->tex.identifiers_count++;
 		game->tex.got_we++;
-		game->tex.we = path;
+		game->tex.we = clean_line(path);
 	}
 	else if (!ft_strncmp(line, "EA", 2) && !game->tex.got_ea)
 	{
 		game->tex.identifiers_count++;
 		game->tex.got_ea++;
-		game->tex.ea = path;
+		game->tex.ea = clean_line(path);
 	}
 	else if (!ft_strncmp(line, "F", 1) && !game->colors.got_floor)
 	{
@@ -99,5 +100,4 @@ void parse_identifier(t_game *game, char *line)
 		game->colors.got_ceiling++;
 		game->colors.ceiling = parse_color(path);
 	}
-
 }

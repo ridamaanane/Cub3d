@@ -110,6 +110,7 @@ void parse_map(t_game *game, int fd)
 		printf("Error\nInvalid number of identifiers (need 4 textures (NO, SO, EA, WE) and 2 colors (F , C))\n");
 		exit(1);
 	}
+	check_path_textures(game);
 	check_allowed_characters(game);
 	check_the_borders(game);
 	check_side_borders(game);

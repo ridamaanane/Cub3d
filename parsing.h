@@ -90,6 +90,7 @@ void check_file_extension(char *filename);
 char *clean_line(char *line);
 char **resize_map(char **map, int map_height);
 void find_player_pos(t_game *game);
+void exit_error(char *msg);
 
 //utils2
 int	is_empty_line(char *line);
@@ -100,5 +101,8 @@ void parse_identifier(t_game *game, char *line);
 //utils3
 void check_the_borders(t_game *game);
 void check_side_borders(t_game *game);
+
+//check_path_textures
+void check_path_textures(t_game *game);
 
 #endif

@@ -24,19 +24,16 @@ int main(int argc, char **argv)
     game.colors.floor = -1;
     game.colors.ceiling = -1;
 
-    // Open file
     fd = open(argv[1], O_RDONLY);
     if (fd < 0)
     {
         perror("Error opening file");
         return 1;
     }
-
-    // Parse the map
+    check_file_extension(argv[1]);
     parse_map(&game, fd);
     close(fd);
 
-    // Test output
     printf("Textures:\nNO: %s\nSO: %s\nWE: %s\nEA: %s\n",
            game.tex.no, game.tex.so, game.tex.we, game.tex.ea);
     printf("Colors: Floor: %d, Ceiling: %d\n", 
@@ -47,5 +44,4 @@ int main(int argc, char **argv)
     for (int i = 0; i < game.map_height; i++)
         printf("%s\n", game.map[i]);
 
-    return 0;
 }
