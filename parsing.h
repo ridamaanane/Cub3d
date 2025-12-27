@@ -20,7 +20,6 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-// # define TILE_SIZE 64
 # define ESC_KEY 65307
 # define UP 65362
 # define DOWN 65364
@@ -38,18 +37,26 @@ typedef struct s_textures
     char *so; 
     char *we; 
     char *ea;
+    int identifiers_count;
+    int got_no;
+    int got_so;
+    int got_we;
+    int got_ea;
 }   t_textures;
 
 typedef struct s_colors
 {
     int floor;
     int ceiling;
+    int color_count;
+    int got_floor;
+    int got_ceiling;
 } t_colors;
 
 typedef struct s_player
 {
-    int x;      // column in the map
-    int y;      // row in the map
+    int x;
+    int y;
     char dir;   // 'N', 'S', 'E', 'W'
 } t_player;
 
@@ -69,6 +76,7 @@ int ft_arrlen(char **arr);
 int parse_color(char *path);
 
 //parse_map
+void init_struct(t_game *game);
 int	is_map_line(char *line);
 void store_map_line(t_game *game, char *line);
 void check_allowed_characters(t_game *game);

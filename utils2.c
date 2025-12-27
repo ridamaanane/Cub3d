@@ -63,17 +63,41 @@ void parse_identifier(t_game *game, char *line)
 	while (line[i] == ' ')
 		i++;
 	path = ft_strdup(line + i);
-
-	if (!ft_strncmp(line, "NO", 2))
+	if (!ft_strncmp(line, "NO", 2) && !game->tex.got_no)
+	{
+		game->tex.identifiers_count++;
+		game->tex.got_no++;
 		game->tex.no = path;
-	else if (!ft_strncmp(line, "SO", 2))
+	}
+	else if (!ft_strncmp(line, "SO", 2) && !game->tex.got_so)
+	{
+		game->tex.identifiers_count++;
+		game->tex.got_so++;
 		game->tex.so = path;
-	else if (!ft_strncmp(line, "WE", 2))
+	}
+	else if (!ft_strncmp(line, "WE", 2) && !game->tex.got_we)
+	{
+		game->tex.identifiers_count++;
+		game->tex.got_we++;
 		game->tex.we = path;
-	else if (!ft_strncmp(line, "EA", 2))
+	}
+	else if (!ft_strncmp(line, "EA", 2) && !game->tex.got_ea)
+	{
+		game->tex.identifiers_count++;
+		game->tex.got_ea++;
 		game->tex.ea = path;
-	else if (!ft_strncmp(line, "F", 1))
+	}
+	else if (!ft_strncmp(line, "F", 1) && !game->colors.got_floor)
+	{
+		game->colors.color_count++;
+		game->colors.got_floor++;
 		game->colors.floor = parse_color(path);
-	else if (!ft_strncmp(line, "C", 1))
+	}
+	else if (!ft_strncmp(line, "C", 1) && !game->colors.got_ceiling)
+	{
+		game->colors.color_count++;
+		game->colors.got_ceiling++;
 		game->colors.ceiling = parse_color(path);
+	}
+
 }

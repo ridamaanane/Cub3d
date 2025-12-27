@@ -12,11 +12,11 @@ int	is_map_line(char *line)
 			i++;
 			continue;
 		}
-		if (is_valid_map_char(line[i]))
-			return (1);
+		if (!is_valid_map_char(line[i]))
+			return (0);
 		i++;
 	}
-	return (0);
+	return (1);
 }
 
 void check_allowed_characters(t_game *game)
@@ -24,6 +24,11 @@ void check_allowed_characters(t_game *game)
 	int (i), (j);
 
 	i = 0;
+	if (!game->map)
+	{
+		printf("Empty Map\n");
+		exit(1);
+	}
 	while (game->map[i])
 	{
 		j = 0;
@@ -31,7 +36,7 @@ void check_allowed_characters(t_game *game)
 		{
 			if (!is_valid_map_char(game->map[i][j]) && game->map[i][j] != '\n')
 			{
-				printf("Error\nInvalid character in map\n");
+				printf("Error\nInvalid character in map");
 				exit(1);
 			}
 			j++;
@@ -50,11 +55,24 @@ void store_map_line(t_game *game, char *line)
 	game->map_height++;
 }
 
+void init_struct(t_game *game)
+{
+	game->tex.identifiers_count = 0;
+	game->colors.color_count = 0;
+	game->tex.got_no = 0;
+	game->tex.got_so = 0;
+	game->tex.got_we = 0;
+	game->tex.got_ea = 0;
+	game->colors.got_floor = 0;
+	game->colors.got_ceiling = 0;
+	game->map_started = 0;
+}
+
 void parse_map(t_game *game, int fd)
 {
 	char *line;
 
-	game->map_started = 0; //map has not started yet
+	init_struct(game);
 	while ((line = get_next_line(fd)) != NULL)
 	{
 		if (!game->map_started)
@@ -70,7 +88,7 @@ void parse_map(t_game *game, int fd)
 			}
 			else
 			{
-				printf("Error\nInvalid line in file\n");
+				printf("Error\nInvalid identifier or map line");
 				exit(1);
 			}
 		}
@@ -86,6 +104,11 @@ void parse_map(t_game *game, int fd)
 				exit(1);
 			}
 		}
+	}
+	if (game->colors.color_count != 2 || game->tex.identifiers_count != 4)
+	{
+		printf("Error\nInvalid number of identifiers (need 4 textures (NO, SO, EA, WE) and 2 colors (F , C))\n");
+		exit(1);
 	}
 	check_allowed_characters(game);
 	check_the_borders(game);
