@@ -86,6 +86,11 @@ void parse_map(t_game *game, int fd);
 int	ft_strcmp(char *s1, char *s2);
 void check_file_extension(char *filename);
 
+//check
+int	is_empty_line(char *line);
+int	is_identifier(char *line);
+int	is_valid_map_char(char c);
+
 //utils
 char *clean_line(char *line);
 char **resize_map(char **map, int map_height);
@@ -93,9 +98,9 @@ void find_player_pos(t_game *game);
 void exit_error(char *msg);
 
 //utils2
-int	is_empty_line(char *line);
-int	is_identifier(char *line);
-int	is_valid_map_char(char c);
+int get_identifier_index(char *line);
+void process_texture_data(t_game *game, char *line, char *path);
+void process_color_data(t_game *game, char *line, char *path);
 void parse_identifier(t_game *game, char *line);
 
 //utils3

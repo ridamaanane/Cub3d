@@ -25,20 +25,14 @@ void check_allowed_characters(t_game *game)
 
 	i = 0;
 	if (!game->map)
-	{
-		printf("Empty Map\n");
-		exit(1);
-	}
+		exit_error("Error\nEmpty Map");
 	while (game->map[i])
 	{
 		j = 0;
 		while (game->map[i][j])
 		{
 			if (!is_valid_map_char(game->map[i][j]) && game->map[i][j] != '\n')
-			{
-				printf("Error\nInvalid character in map");
-				exit(1);
-			}
+				exit_error("Error\nInvalid character in map");
 			j++;
 		}
 		i++;
@@ -50,9 +44,11 @@ void store_map_line(t_game *game, char *line)
 	char *cleaned_line;
 
 	cleaned_line = clean_line(line);
+	free(line);
 	game->map = resize_map(game->map, game->map_height); //add the space for new line
 	game->map[game->map_height] = cleaned_line;  //game->map_height(index)
 	game->map_height++;
+	free(cleaned_line);
 }
 
 void init_struct(t_game *game)
@@ -87,10 +83,7 @@ void parse_map(t_game *game, int fd)
 				store_map_line(game, line);
 			}
 			else
-			{
-				printf("Error\nInvalid identifier or map line");
-				exit(1);
-			}
+				exit_error("Error\nInvalid identifier or map line");
 		}
 		else
 		{
@@ -99,17 +92,11 @@ void parse_map(t_game *game, int fd)
 			else if (is_empty_line(line))
 				break;
 			else
-			{
-				printf("Error\nInvalid line after map started\n");
-				exit(1);
-			}
+				exit_error("Error\nInvalid line after map started");
 		}
 	}
-	if (game->colors.color_count != 2 || game->tex.identifiers_count != 4)
-	{
-		printf("Error\nInvalid number of identifiers (need 4 textures (NO, SO, EA, WE) and 2 colors (F , C))\n");
-		exit(1);
-	}
+	if (game->tex.identifiers_count != 4 || game->colors.color_count != 2)
+		exit_error("Error\nInvalid number of identifiers (need 4 textures (NO, SO, EA, WE) and 2 colors (F , C))");
 	check_path_textures(game);
 	check_allowed_characters(game);
 	check_the_borders(game);

@@ -33,30 +33,23 @@ int parse_color(char *path)
     int i;
 
     char *clean = clean_line(path);
+    // free(path);
     arr = ft_split(clean, ',');
+    free(clean);
     if (!arr || ft_arrlen(arr) != 3)
-    {
-        printf("Error\nInvalid color format\n");
-        exit(1);
-    }
-
+        exit_error("Error\nInvalid color format");
     i = 0;
     while (i < 3)
     {
         if (!is_number(arr[i]))
-        {
-            printf("Error\nInvalid color\n");
-            exit(1);
-        }
+            exit_error("Error\nInvalid color");
         i++;
     }
     r = ft_atoi(arr[0]);
     g = ft_atoi(arr[1]);
     b = ft_atoi(arr[2]);
+    // free(arr);
     if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
-    {
-        printf("Error\nColor out of range\n");
-        exit(1);
-    }
+        exit_error("Error\nColor out of range");
     return (r << 16) | (g << 8) | b;
 }
