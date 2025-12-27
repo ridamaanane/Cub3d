@@ -38,9 +38,6 @@ int	is_valid_map_char(char c)
 	if (c == '0' || c == '1' || c == ' '
 		|| c == 'N' || c == 'S'
 		|| c == 'E' || c == 'W')
-		{
-			printf("here the charachter : %c\n", c);
-			return (1);
-		}
+		return (1);
 	return (0);
 }

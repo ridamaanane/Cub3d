@@ -48,7 +48,6 @@ void store_map_line(t_game *game, char *line)
 	game->map = resize_map(game->map, game->map_height); //add the space for new line
 	game->map[game->map_height] = cleaned_line;  //game->map_height(index)
 	game->map_height++;
-	free(cleaned_line);
 }
 
 void init_struct(t_game *game)
