@@ -17,32 +17,24 @@ void process_texture_data(t_game *game, char *line, char *path)
 		game->tex.identifiers_count++;
 		game->tex.got_no++;
 		game->tex.no = clean_line(path);
-		// free(line);
-		// free(path);
 	}
 	else if (!ft_strncmp(line, "SO", 2) && !game->tex.got_so)
 	{
 		game->tex.identifiers_count++;
 		game->tex.got_so++;
 		game->tex.so = clean_line(path);
-		// free(line);
-		// free(path);
 	}
 	else if (!ft_strncmp(line, "WE", 2) && !game->tex.got_we)
 	{
 		game->tex.identifiers_count++;
 		game->tex.got_we++;
 		game->tex.we = clean_line(path);
-		// free(line);
-		// free(path);
 	}
 	else if (!ft_strncmp(line, "EA", 2) && !game->tex.got_ea)
 	{
 		game->tex.identifiers_count++;
 		game->tex.got_ea++;
 		game->tex.ea = clean_line(path);
-		// free(line);
-		// free(path);
 	}
 }
 
@@ -53,16 +45,12 @@ void process_color_data(t_game *game, char *line, char *path)
 		game->colors.color_count++;
 		game->colors.got_floor++;
 		game->colors.floor = parse_color(path);
-		// free(line);
-		// free(path);
 	}
 	else if (!ft_strncmp(line, "C", 1) && !game->colors.got_ceiling)
 	{
 		game->colors.color_count++;
 		game->colors.got_ceiling++;
 		game->colors.ceiling = parse_color(path);
-		// free(line);
-		// free(path);
 	}
 }
 

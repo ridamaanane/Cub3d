@@ -8,7 +8,6 @@ char *clean_line(char *line)
     new = malloc(ft_strlen(line) + 1);
     if (!new)
         return (NULL);
-
     i = 0;
     while (line[i] && line[i] != '\n')
     {
