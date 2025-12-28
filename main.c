@@ -30,7 +30,7 @@ int main(int argc, char **argv)
         perror("Error opening file");
         return 1;
     }
-    check_file_extension(&game, argv[1]);
+    check_file_extension(&game, argv[1], fd);
     parse_map(&game, fd);
     close(fd);
 

@@ -18,19 +18,19 @@ char *clean_line(char *line)
     return (new);
 }
 
-char **resize_map(t_game *game, char **map, int map_height) //make space for the new line + NULL
+char **resize_map(t_game *game, char **map, int map_height, int fd) //make space for the new line + NULL
 {
     char **tmp;
 
     // 1 new line (We reserved the line) + 1 NULL
     tmp = realloc(map, sizeof(char *) * (map_height + 2));
     if (!tmp)
-        exit_error(game, "Error\nMemory allocation failed");
+        exit_error(game, "Error\nMemory allocation failed", fd);
     tmp[map_height + 1] = NULL; //tmp[map_height] → this is where we store the new line so + 1 for the NULL
     return tmp;
 }
 
-void find_player_pos(t_game *game)
+void find_player_pos(t_game *game, int fd)
 {
     int (i), (j), (player_found);
 
@@ -45,7 +45,7 @@ void find_player_pos(t_game *game)
                 game->map[i][j] == 'E' || game->map[i][j] == 'W')
             {
                 if (player_found)
-                    exit_error(game, "Error\nMultiple players!");
+                    exit_error(game, "Error\nMultiple players!", fd);
                 game->player.x = j;
                 game->player.y = i;
                 game->player.dir = game->map[i][j];
@@ -56,12 +56,15 @@ void find_player_pos(t_game *game)
         i++;
     }
     if (!player_found)
-        exit_error(game, "Error\nNo player found!");
+        exit_error(game, "Error\nNo player found!", fd);
 }
 
-void exit_error(t_game *game, char *msg)
+void exit_error(t_game *game, char *msg, int fd)
 {
+    char *tmp;
     ft_putendl_fd(msg, 2);
     free_game(game);
+    while ((tmp = get_next_line(fd)))
+        free(tmp);
     exit(1);
 }

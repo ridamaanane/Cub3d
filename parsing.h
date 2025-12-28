@@ -73,18 +73,18 @@ typedef struct s_game
 //parse_color
 int is_number(char *str);
 int ft_arrlen(char **arr);
-int parse_color(t_game *game, char *path);
+int parse_color(t_game *game, char *path, int fd);
 
 //parse_map
 void init_struct(t_game *game);
 int	is_map_line(char *line);
-void store_map_line(t_game *game, char *line);
-void check_allowed_characters(t_game *game);
+void store_map_line(t_game *game, char *line, int fd);
+void check_allowed_characters(t_game *game, int fd);
 void parse_map(t_game *game, int fd);
 
 //check_file_extension
 int	ft_strcmp(char *s1, char *s2);
-void check_file_extension(t_game *game, char *filename);
+void check_file_extension(t_game *game, char *filename, int fd);
 
 //check
 int	is_empty_line(char *line);
@@ -93,19 +93,19 @@ int	is_valid_map_char(char c);
 
 //utils
 char *clean_line(char *line);
-char **resize_map(t_game *game, char **map, int map_height);
-void find_player_pos(t_game *game);
-void exit_error(t_game *game, char *msg);
+char **resize_map(t_game *game, char **map, int map_height, int fd);
+void find_player_pos(t_game *gamem , int fd);
+void exit_error(t_game *game, char *msg, int fd);
 
 //utils2
 int get_identifier_index(char *line);
 void process_texture_data(t_game *game, char *line, char *path);
-void process_color_data(t_game *game, char *line, char *path);
-void parse_identifier(t_game *game, char *line);
+void process_color_data(t_game *game, char *line, char *path, int fd);
+void parse_identifier(t_game *game, char *line, int fd);
 
 //utils3
-void check_the_borders(t_game *game);
-void check_side_borders(t_game *game);
+void check_the_borders(t_game *game, int fd);
+void check_side_borders(t_game *game, int fd);
 
 //check_path_textures
 void check_path_textures(t_game *game);

@@ -1,6 +1,6 @@
 #include "parsing.h"
 
-void check_the_borders(t_game *game)
+void check_the_borders(t_game *game, int fd)
 {
     int j;
 
@@ -9,7 +9,7 @@ void check_the_borders(t_game *game)
     while (game->map[0][j])
     {
         if (game->map[0][j] != '1')
-            exit_error(game, "Error\nInvalid top border in map");
+            exit_error(game, "Error\nInvalid top border in map", fd);
         j++;
     }
     // Check bottom row
@@ -17,12 +17,12 @@ void check_the_borders(t_game *game)
     while (game->map[game->map_height - 1][j])
     {
         if (game->map[game->map_height - 1][j] != '1')
-            exit_error(game, "Error\nInvalid bottom border in map");
+            exit_error(game, "Error\nInvalid bottom border in map", fd);
         j++;
     }
 }
 
-void check_side_borders(t_game *game)
+void check_side_borders(t_game *game, int fd)
 {
     int i;
     int last_index;
@@ -33,7 +33,7 @@ void check_side_borders(t_game *game)
         last_index = ft_strlen(game->map[i]) - 1;
 
         if (game->map[i][0] != '1' || game->map[i][last_index] != '1')
-            exit_error(game, "Error\nInvalid side borders in map");
+            exit_error(game, "Error\nInvalid side borders in map", fd);
         i++;
     }
 }
