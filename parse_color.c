@@ -26,7 +26,7 @@ int ft_arrlen(char **arr)
     return (i);
 }
 
-int parse_color(char *path)
+int parse_color(t_game *game, char *path)
 {
     char **arr;
     int r, g, b;
@@ -36,12 +36,12 @@ int parse_color(char *path)
     arr = ft_split(clean, ',');
     free(clean);
     if (!arr || ft_arrlen(arr) != 3)
-        exit_error("Error\nInvalid color format");
+        exit_error(game, "Error\nInvalid color format");
     i = 0;
     while (i < 3)
     {
         if (!is_number(arr[i]))
-            exit_error("Error\nInvalid color");
+            exit_error(game, "Error\nInvalid color");
         i++;
     }
     r = ft_atoi(arr[0]);
@@ -49,6 +49,6 @@ int parse_color(char *path)
     b = ft_atoi(arr[2]);
     free_array(arr);
     if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
-        exit_error("Error\nColor out of range");
+        exit_error(game, "Error\nColor out of range");
     return (r << 16) | (g << 8) | b;
 }

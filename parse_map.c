@@ -25,14 +25,14 @@ void check_allowed_characters(t_game *game)
 
 	i = 0;
 	if (!game->map)
-		exit_error("Error\nEmpty Map");
+		exit_error(game, "Error\nEmpty Map");
 	while (game->map[i])
 	{
 		j = 0;
 		while (game->map[i][j])
 		{
 			if (!is_valid_map_char(game->map[i][j]) && game->map[i][j] != '\n')
-				exit_error("Error\nInvalid character in map");
+				exit_error(game, "Error\nInvalid character in map");
 			j++;
 		}
 		i++;
@@ -44,7 +44,7 @@ void store_map_line(t_game *game, char *line)
 	char *cleaned_line;
 
 	cleaned_line = clean_line(line);
-	game->map = resize_map(game->map, game->map_height); //add the space for new line
+	game->map = resize_map(game, game->map, game->map_height); //add the space for new line
 	game->map[game->map_height] = cleaned_line;  //game->map_height(index)
 	game->map_height++;
 }
@@ -72,7 +72,10 @@ void parse_map(t_game *game, int fd)
 		if (!game->map_started)
 		{
 			if (is_empty_line(line))
+			{
+				free(line);
 				continue;
+			}
 			else if (is_identifier(line))
 				parse_identifier(game, line);
 			else if (is_map_line(line))
@@ -81,21 +84,30 @@ void parse_map(t_game *game, int fd)
 				store_map_line(game, line);
 			}
 			else
-				exit_error("Error\nInvalid identifier or map line");
+			{
+				free(line);
+				exit_error(game, "Error\nInvalid identifier or map line");
+			}
 		}
 		else
 		{
 			if (is_map_line(line))
 				store_map_line(game, line);
 			else if (is_empty_line(line))
+			{
+				free(line);
 				break;
+			}
 			else
-				exit_error("Error\nInvalid line after map started");
+			{
+				free(line);
+				exit_error(game, "Error\nInvalid line after map started");
+			}
 		}
 		free(line);
 	}
 	if (game->tex.identifiers_count != 4 || game->colors.color_count != 2)
-		exit_error("Error\nInvalid number of identifiers (need 4 textures (NO, SO, EA, WE) and 2 colors (F , C))");
+		exit_error(game, "Error\nInvalid number of identifiers (need 4 textures (NO, SO, EA, WE) and 2 colors (F , C))");
 	check_path_textures(game);
 	check_allowed_characters(game);
 	check_the_borders(game);

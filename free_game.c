@@ -17,8 +17,6 @@ void free_game(t_game *game)
 {
     int i;
 
-    if (!game)
-        return;
     if (game->tex.no)
         free(game->tex.no);
     if (game->tex.so)

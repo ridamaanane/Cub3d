@@ -15,15 +15,15 @@ void check_path_textures(t_game *game)
     while (i < 4)
     {
         if (!paths[i])
-            exit_error("Error\nMissing texture");
+            exit_error(game, "Error\nMissing texture");
         if (ft_strlen(paths[i]) < 4)
-            exit_error("Error\nInvalid texture path");
+            exit_error(game, "Error\nInvalid texture path");
         len = ft_strlen(paths[i]);
         if (len < 4 || ft_strcmp((paths[i] + len) - 4, ".xpm") != 0)
-            exit_error("Error\nInvalid texture extension");
+            exit_error(game, "Error\nInvalid texture extension");
         fd = open(paths[i], O_RDONLY);
         if (fd == -1)
-            exit_error("Error\nTexture file not found or unreadable");
+            exit_error(game, "Error\nTexture file not found or unreadable");
         close(fd);
         i++;
     }

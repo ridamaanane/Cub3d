@@ -73,7 +73,7 @@ typedef struct s_game
 //parse_color
 int is_number(char *str);
 int ft_arrlen(char **arr);
-int parse_color(char *path);
+int parse_color(t_game *game, char *path);
 
 //parse_map
 void init_struct(t_game *game);
@@ -84,7 +84,7 @@ void parse_map(t_game *game, int fd);
 
 //check_file_extension
 int	ft_strcmp(char *s1, char *s2);
-void check_file_extension(char *filename);
+void check_file_extension(t_game *game, char *filename);
 
 //check
 int	is_empty_line(char *line);
@@ -93,9 +93,9 @@ int	is_valid_map_char(char c);
 
 //utils
 char *clean_line(char *line);
-char **resize_map(char **map, int map_height);
+char **resize_map(t_game *game, char **map, int map_height);
 void find_player_pos(t_game *game);
-void exit_error(char *msg);
+void exit_error(t_game *game, char *msg);
 
 //utils2
 int get_identifier_index(char *line);

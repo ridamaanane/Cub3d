@@ -44,13 +44,13 @@ void process_color_data(t_game *game, char *line, char *path)
 	{
 		game->colors.color_count++;
 		game->colors.got_floor++;
-		game->colors.floor = parse_color(path);
+		game->colors.floor = parse_color(game, path);
 	}
 	else if (!ft_strncmp(line, "C", 1) && !game->colors.got_ceiling)
 	{
 		game->colors.color_count++;
 		game->colors.got_ceiling++;
-		game->colors.ceiling = parse_color(path);
+		game->colors.ceiling = parse_color(game, path);
 	}
 }
 

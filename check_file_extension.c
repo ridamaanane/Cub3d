@@ -16,11 +16,11 @@ int	ft_strcmp(char *s1, char *s2)
 	return (0);
 }
 
-void check_file_extension(char *filename)
+void check_file_extension(t_game *game, char *filename)
 {
     int len;
 
     len = ft_strlen(filename);
     if (len < 4 || ft_strcmp(filename + len - 4, ".cub") != 0)
-		exit_error("Error\nInvalid file extension. Must be .cub");
+		exit_error(game, "Error\nInvalid file extension. Must be .cub");
 }
