@@ -64,7 +64,7 @@ void exit_error(t_game *game, char *msg, int fd)
     char *tmp;
     ft_putendl_fd(msg, 2);
     free_game(game);
-    while ((tmp = get_next_line(fd)))
+    while ((tmp = get_next_line(fd))) //clean rest of the file
         free(tmp);
     exit(1);
 }

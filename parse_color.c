@@ -41,7 +41,10 @@ int parse_color(t_game *game, char *path, int fd)
     while (i < 3)
     {
         if (!is_number(arr[i]))
+        {
+            free_array(arr);
             exit_error(game, "Error\nInvalid color", fd);
+        }
         i++;
     }
     r = ft_atoi(arr[0]);
