@@ -44,13 +44,13 @@ void process_color_data(t_game *game, char *line, char *path, int fd)
 	{
 		game->colors.color_count++;
 		game->colors.got_floor++;
-		game->colors.floor = parse_color(game, path, fd);
+		game->colors.floor = parse_color(game, line, path, fd);
 	}
 	else if (!ft_strncmp(line, "C", 1) && !game->colors.got_ceiling)
 	{
 		game->colors.color_count++;
 		game->colors.got_ceiling++;
-		game->colors.ceiling = parse_color(game, path, fd);
+		game->colors.ceiling = parse_color(game, line, path, fd);
 	}
 }
 
@@ -62,8 +62,7 @@ void parse_identifier(t_game *game, char *line, int fd)
 	i = get_identifier_index(line);
 	while (line[i] == ' ')
 		i++;
-	path = ft_strdup(line + i);
+	path = line + i;
 	process_texture_data(game, line, path);
 	process_color_data(game, line, path, fd);
-	free(path);
 }

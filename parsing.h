@@ -73,7 +73,7 @@ typedef struct s_game
 //parse_color
 int is_number(char *str);
 int ft_arrlen(char **arr);
-int parse_color(t_game *game, char *path, int fd);
+int parse_color(t_game *game, char *line, char *path, int fd);
 
 //parse_map
 void init_struct(t_game *game);
