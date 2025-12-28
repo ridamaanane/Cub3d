@@ -110,4 +110,9 @@ void check_side_borders(t_game *game);
 //check_path_textures
 void check_path_textures(t_game *game);
 
+//free_game
+void free_array(char **array);
+void free_game(t_game *game);
+
+
 #endif

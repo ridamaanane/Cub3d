@@ -43,5 +43,5 @@ int main(int argc, char **argv)
     printf("Map (%d lines):\n", game.map_height);
     for (int i = 0; i < game.map_height; i++)
         printf("%s\n", game.map[i]);
-
+    free_game(&game);   
 }

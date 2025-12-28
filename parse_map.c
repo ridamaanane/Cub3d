@@ -44,7 +44,6 @@ void store_map_line(t_game *game, char *line)
 	char *cleaned_line;
 
 	cleaned_line = clean_line(line);
-	free(line);
 	game->map = resize_map(game->map, game->map_height); //add the space for new line
 	game->map[game->map_height] = cleaned_line;  //game->map_height(index)
 	game->map_height++;
@@ -93,6 +92,7 @@ void parse_map(t_game *game, int fd)
 			else
 				exit_error("Error\nInvalid line after map started");
 		}
+		free(line);
 	}
 	if (game->tex.identifiers_count != 4 || game->colors.color_count != 2)
 		exit_error("Error\nInvalid number of identifiers (need 4 textures (NO, SO, EA, WE) and 2 colors (F , C))");

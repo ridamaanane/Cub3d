@@ -5,7 +5,7 @@ LIBFT = $(LIBFT_DIR)/libft.a
 CMLX = -lmlx -lXext -lX11
 
 SRC = check_file_extension.c check_path_textures.c check.c \
-	parse_color.c parse_map.c utils.c utils2.c utils3.c main.c 
+	parse_color.c parse_map.c utils.c utils2.c utils3.c main.c free_game.c
 	
 
 OBJ = $(SRC:%.c=%.o)

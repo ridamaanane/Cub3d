@@ -66,5 +66,4 @@ void parse_identifier(t_game *game, char *line)
 	process_texture_data(game, line, path);
 	process_color_data(game, line, path);
 	free(path);
-	free(line);
 }
