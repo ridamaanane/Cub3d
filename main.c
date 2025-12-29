@@ -32,6 +32,10 @@ int main(int argc, char **argv)
     }
     check_file_extension(&game, argv[1], fd);
     parse_map(&game, fd);
+    char **map_copy;
+    map_copy = dup_map(&game);
+    flood_fill(map_copy, &game, game.player ,fd);
+    // free_array(map_copy);
     close(fd);
 
     printf("Textures:\nNO: %s\nSO: %s\nWE: %s\nEA: %s\n",

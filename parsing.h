@@ -114,5 +114,8 @@ void check_path_textures(t_game *game);
 void free_array(char **array);
 void free_game(t_game *game);
 
+//flood_fill
+char **dup_map(t_game *game);
+void flood_fill(char **map, t_game *game, t_player player, int fd);
 
 #endif
