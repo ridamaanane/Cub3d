@@ -35,9 +35,8 @@ int main(int argc, char **argv)
     char **map_copy;
     map_copy = dup_map(&game);
     flood_fill(map_copy, &game, game.player ,fd);
-    // free_array(map_copy);
+    free_array(map_copy);
     close(fd);
-
     printf("Textures:\nNO: %s\nSO: %s\nWE: %s\nEA: %s\n",
            game.tex.no, game.tex.so, game.tex.we, game.tex.ea);
     printf("Colors: Floor: %d, Ceiling: %d\n", 
