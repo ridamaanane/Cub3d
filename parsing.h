@@ -6,7 +6,7 @@
 /*   By: rmaanane <ridamaanane@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 15:06:56 by rmaanane          #+#    #+#             */
-/*   Updated: 2025/12/30 01:20:40 by rmaanane         ###   ########.fr       */
+/*   Updated: 2025/12/30 17:18:45 by rmaanane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,9 +77,9 @@ int parse_color(t_game *game, char *line, char *path, int fd);
 
 //parse_map
 void init_struct(t_game *game);
-int	is_map_line(char *line);
 void store_map_line(t_game *game, char *line, int fd);
 void check_allowed_characters(t_game *game, int fd);
+void validate_map(t_game *game, int fd);
 void parse_map(t_game *game, int fd);
 
 //check_file_extension
@@ -90,6 +90,7 @@ void check_file_extension(t_game *game, char *filename, int fd);
 int	is_empty_line(char *line);
 int	is_identifier(char *line);
 int	is_valid_map_char(char c);
+int	is_map_line(char *line);
 
 //utils
 char *clean_line(char *line);

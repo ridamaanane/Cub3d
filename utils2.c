@@ -1,16 +1,28 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils2.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rmaanane <ridamaanane@gmail.com>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/12/30 18:08:59 by rmaanane          #+#    #+#             */
+/*   Updated: 2025/12/30 18:09:01 by rmaanane         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "parsing.h"
 
-int get_identifier_index(char *line)
+int	get_identifier_index(char *line)
 {
 	if (!ft_strncmp(line, "NO", 2) || !ft_strncmp(line, "SO", 2)
-	|| !ft_strncmp(line, "WE", 2) || !ft_strncmp(line, "EA", 2))
+		|| !ft_strncmp(line, "WE", 2) || !ft_strncmp(line, "EA", 2))
 		return (2);
 	else if (!ft_strncmp(line, "F", 1) || !ft_strncmp(line, "C", 1))
 		return (1);
 	return (0);
 }
 
-void process_texture_data(t_game *game, char *line, char *path)
+void	process_texture_data(t_game *game, char *line, char *path)
 {
 	if (!ft_strncmp(line, "NO", 2) && !game->tex.got_no)
 	{
@@ -38,7 +50,7 @@ void process_texture_data(t_game *game, char *line, char *path)
 	}
 }
 
-void process_color_data(t_game *game, char *line, char *path, int fd)
+void	process_color_data(t_game *game, char *line, char *path, int fd)
 {
 	if (!ft_strncmp(line, "F", 1) && !game->colors.got_floor)
 	{
@@ -54,10 +66,10 @@ void process_color_data(t_game *game, char *line, char *path, int fd)
 	}
 }
 
-void parse_identifier(t_game *game, char *line, int fd)
+void	parse_identifier(t_game *game, char *line, int fd)
 {
-	int i;
-	char *path;
+	int		i;
+	char	*path;
 
 	i = get_identifier_index(line);
 	while (line[i] == ' ')

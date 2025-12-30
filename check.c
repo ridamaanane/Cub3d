@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rmaanane <ridamaanane@gmail.com>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/12/30 18:02:46 by rmaanane          #+#    #+#             */
+/*   Updated: 2025/12/30 18:03:20 by rmaanane         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "parsing.h"
 
 int	is_empty_line(char *line)
 {
 	int	i;
-    
-    i = 0;
+
+	i = 0;
 	while (line[i])
 	{
 		if (line[i] != ' ' && line[i] != '\n' && line[i] != '\t')
@@ -35,9 +47,27 @@ int	is_identifier(char *line)
 
 int	is_valid_map_char(char c)
 {
-	if (c == '0' || c == '1' || c == ' '
-		|| c == 'N' || c == 'S'
-		|| c == 'E' || c == 'W')
+	if (c == '0' || c == '1' || c == ' ' || c == 'N' || c == 'S' || c == 'E'
+		|| c == 'W')
 		return (1);
 	return (0);
+}
+
+int	is_map_line(char *line)
+{
+	int	i;
+
+	i = 0;
+	while (line[i])
+	{
+		if (line[i] == '\n')
+		{
+			i++;
+			continue ;
+		}
+		if (!is_valid_map_char(line[i]))
+			return (0);
+		i++;
+	}
+	return (1);
 }

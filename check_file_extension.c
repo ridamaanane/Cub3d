@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_file_extension.c                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rmaanane <ridamaanane@gmail.com>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/12/30 18:01:15 by rmaanane          #+#    #+#             */
+/*   Updated: 2025/12/30 18:02:09 by rmaanane         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "parsing.h"
 
 int	ft_strcmp(char *s1, char *s2)
@@ -16,11 +28,11 @@ int	ft_strcmp(char *s1, char *s2)
 	return (0);
 }
 
-void check_file_extension(t_game *game, char *filename, int fd)
+void	check_file_extension(t_game *game, char *filename, int fd)
 {
-    int len;
+	int	len;
 
-    len = ft_strlen(filename);
-    if (len < 4 || ft_strcmp(filename + len - 4, ".cub") != 0)
+	len = ft_strlen(filename);
+	if (len < 4 || ft_strcmp(filename + len - 4, ".cub") != 0)
 		exit_error(game, "Error\nInvalid file extension. Must be .cub", fd);
 }

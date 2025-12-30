@@ -36,18 +36,18 @@ void	flood_fill(char **map, t_game *game, t_player player, int fd)
 {
 	if (player.y < 0 || player.y >= game->map_height || player.x < 0
 		|| player.x >= ft_strlen(map[player.y]))
-    {
-        free_array(map);
+	{
+		free_array(map);
 		exit_error(game, "Error\nMap is open", fd);
-    }
+	}
 	if (map[player.y][player.x] == '1' || map[player.y][player.x] == 'F')
 		return ;
 	if (map[player.y][player.x] == ' ')
-    {
-        free_array(map);
+	{
+		free_array(map);
 		exit_error(game, "Error\nMap is open", fd);
-    }	
-    map[player.y][player.x] = 'F';
+	}
+	map[player.y][player.x] = 'F';
 	flood_fill(map, game, (t_player){player.x + 1, player.y, player.dir}, fd);
 	flood_fill(map, game, (t_player){player.x - 1, player.y, player.dir}, fd);
 	flood_fill(map, game, (t_player){player.x, player.y + 1, player.dir}, fd);
