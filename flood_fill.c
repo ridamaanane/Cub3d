@@ -6,7 +6,7 @@
 /*   By: rmaanane <ridamaanane@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/30 01:02:27 by string            #+#    #+#             */
-/*   Updated: 2025/12/30 02:00:48 by rmaanane         ###   ########.fr       */
+/*   Updated: 2025/12/30 09:49:31 by rmaanane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	flood_fill(char **map, t_game *game, t_player player, int fd)
 		exit_error(game, "Error\nMap is open", fd);
     }	
     map[player.y][player.x] = 'F';
-	flood_fill(map, game, (t_player){player.x + 1, player.y, player.dir}, fd); //1
+	flood_fill(map, game, (t_player){player.x + 1, player.y, player.dir}, fd);
 	flood_fill(map, game, (t_player){player.x - 1, player.y, player.dir}, fd);
 	flood_fill(map, game, (t_player){player.x, player.y + 1, player.dir}, fd);
 	flood_fill(map, game, (t_player){player.x, player.y - 1, player.dir}, fd);
