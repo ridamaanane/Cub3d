@@ -31,7 +31,6 @@ void check_side_borders(t_game *game, int fd)
     while (i < game->map_height - 1) // skip last row
     {
         last_index = ft_strlen(game->map[i]) - 1;
-
         if (game->map[i][0] != '1' || game->map[i][last_index] != '1')
             exit_error(game, "Error\nInvalid side borders in map", fd);
         i++;

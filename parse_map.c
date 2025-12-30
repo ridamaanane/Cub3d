@@ -91,13 +91,14 @@ void parse_map(t_game *game, int fd)
 		}
 		else
 		{
-			if (is_map_line(line))
-				store_map_line(game, line, fd);
-			else if (is_empty_line(line))
+			if (is_empty_line(line))
 			{
 				free(line);
+				exit_error(game, "Error\nEmpty line after map started", fd);
 				break;
 			}
+			else if (is_map_line(line))
+				store_map_line(game, line, fd);
 			else
 			{
 				free(line);
