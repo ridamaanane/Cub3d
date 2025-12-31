@@ -6,7 +6,7 @@
 /*   By: rmaanane <ridamaanane@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/30 18:02:46 by rmaanane          #+#    #+#             */
-/*   Updated: 2025/12/30 18:03:20 by rmaanane         ###   ########.fr       */
+/*   Updated: 2025/12/31 10:53:54 by rmaanane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ int	is_identifier(char *line)
 {
 	if (!line)
 		return (0);
+	while (*line == ' ')
+		line++;
 	if (!ft_strncmp(line, "NO ", 3))
 		return (1);
 	if (!ft_strncmp(line, "SO ", 3))

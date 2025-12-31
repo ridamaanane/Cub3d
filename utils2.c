@@ -6,7 +6,7 @@
 /*   By: rmaanane <ridamaanane@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/30 18:08:59 by rmaanane          #+#    #+#             */
-/*   Updated: 2025/12/30 18:09:01 by rmaanane         ###   ########.fr       */
+/*   Updated: 2025/12/31 11:09:42 by rmaanane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@ void	parse_identifier(t_game *game, char *line, int fd)
 	int		i;
 	char	*path;
 
+	while (*line == ' ')
+		line++;
 	i = get_identifier_index(line);
 	while (line[i] == ' ')
 		i++;
