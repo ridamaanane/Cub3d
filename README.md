@@ -136,8 +136,11 @@ This ensures the player cannot escape the map.
 ## 📌 8. Summary
 
 ✔ Skip leading spaces before identifiers
-✔ Parse exactly 6 identifiers before map
-✔ Map starts only after identifiers
-✔ Map must be closed
-✔ Player must be inside walls
 
+✔ Parse exactly 6 identifiers before map
+
+✔ Map starts only after identifiers
+
+✔ Map must be closed
+
+✔ Player must be inside walls
