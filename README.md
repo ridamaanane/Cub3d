@@ -144,3 +144,41 @@ This ensures the player cannot escape the map.
 ✔ Map must be closed
 
 ✔ Player must be inside walls
+
+Sure 👍 Here’s a clean **README section** you can copy to explain how to clone and run your **Cub3D (42)** project.
+
+---
+
+## How to Clone & Run Cub3D
+
+### 1️⃣ Clone the repository
+
+```bash
+git clone https://github.com/ridamaanane/Cub3D.git
+cd cub3d
+```
+
+### 2️⃣ Compile the project
+
+```bash
+make
+```
+
+### 3️⃣ Run the game
+
+```bash
+./cub3D maps/map1.cub
+```
+
+> 🔹 Replace `maps/map1.cub` with any map file you want to test.
+
+---
+
+## 🛠 Requirements
+
+* Linux or macOS
+* `gcc` / `clang`
+* `make`
+* **MiniLibX** installed
+
+---
